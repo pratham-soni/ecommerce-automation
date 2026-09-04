@@ -10,22 +10,37 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WaitUtils {
 
-    private static final Duration DEFAULT_TIMEOUT = Duration.ofSeconds(10);
+    private static final Duration DEFAULT_TIMEOUT = Duration.ofSeconds(1);
 
     private final WebDriver driver;
     private final WebDriverWait wait;
+    private static final boolean SLOW_MODE = Boolean.parseBoolean(System.getProperty("slow", "false"));
 
     public WaitUtils(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(this.driver, DEFAULT_TIMEOUT);
     }
 
+    private void debugDelay(){
+        if (SLOW_MODE){
+            try{
+                Thread.sleep(DEFAULT_TIMEOUT.toMillis());
+            } catch(InterruptedException e){
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+
     public WebElement waitForVisibility(By locator) {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        WebElement element =  wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        debugDelay();
+        return element;
     }
 
     public WebElement waitForClickable(By locator) {
-        return wait.until(ExpectedConditions.elementToBeClickable(locator));
+        WebElement element =  wait.until(ExpectedConditions.elementToBeClickable(locator));
+        debugDelay();
+        return element;
     }
 
     public WebElement waitForPresence(By locator) {
