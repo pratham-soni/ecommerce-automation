@@ -1,38 +1,43 @@
 package com.ecommerce.automation.pages;
 
+import com.ecommerce.automation.utils.LocatorFactory;
+import com.ecommerce.automation.utils.YamlLocatorReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import com.ecommerce.automation.utils.ConfigReader;
 import com.ecommerce.automation.utils.WaitUtils;
 
 public class LoginPage {
-    private static final String PAGE_URL = "https://www.saucedemo.com/";
-
     private final WebDriver driver;
     private final WaitUtils waitUtils;
 
-    private final By usernameInput = By.id("user-name");
-    private final By passwordInput = By.id("password");
-    private final By loginBtn = By.id("login-button");
+    private final By usernameInput = LocatorFactory.create(
+            YamlLocatorReader.get("login", "username"));
 
+    private final By passwordInput = LocatorFactory.create(
+            YamlLocatorReader.get("login", "password"));
 
-    public LoginPage(WebDriver driver){
+    private final By loginBtn = LocatorFactory.create(
+            YamlLocatorReader.get("login", "loginButton"));
+
+    public LoginPage(WebDriver driver) {
         this.driver = driver;
         this.waitUtils = new WaitUtils(driver);
     }
 
-    public void open(){
-        driver.get(PAGE_URL);
+    public void open() {
+        driver.get(ConfigReader.get("baseUrl"));
     }
 
-    public void enterUsername(String username){
+    public void enterUsername(String username) {
         waitUtils.waitForVisibility(usernameInput).sendKeys(username);
     }
 
-    public void enterPassword (String password){
+    public void enterPassword(String password) {
         waitUtils.waitForVisibility(passwordInput).sendKeys(password);
     }
 
-    public void clickLogin(){
+    public void clickLogin() {
         waitUtils.waitForClickable(loginBtn).click();
     }
 

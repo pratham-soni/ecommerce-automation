@@ -3,18 +3,20 @@ package com.ecommerce.automation.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
 
+import com.ecommerce.automation.utils.LocatorFactory;
 import com.ecommerce.automation.utils.WaitUtils;
+import com.ecommerce.automation.utils.YamlLocatorReader;
 
 public class CheckOutPage {
     private final WaitUtils waitUtils;
 
-    private final By firstNameInput = By.id("first-name");
-    private final By lastNameInput = By.id("last-name");
-    private final By postalCodeInput = By.id("postal-code");
-    private final By continueBtn = By.id("continue");
-    private final By checkOutOverview = By.xpath("//span[contains(text(),'Checkout: Overview')]");
-    private final By finisBtn = By.id("finish");
-    private final By checkOutPageTitle = By.xpath("//span[contains(text(),'Checkout: Your Information')]");
+    private final By firstNameInput = LocatorFactory.create(YamlLocatorReader.get("checkout","firstNameInput"));
+    private final By lastNameInput = LocatorFactory.create(YamlLocatorReader.get("checkout","lastNameInput"));
+    private final By postalCodeInput = LocatorFactory.create(YamlLocatorReader.get("checkout","postalCodeInput"));
+    private final By continueBtn = LocatorFactory.create(YamlLocatorReader.get("checkout","continueBtn"));
+    private final By checkOutOverview = LocatorFactory.create(YamlLocatorReader.get("checkout","checkOutOverview"));
+    private final By finisBtn = LocatorFactory.create(YamlLocatorReader.get("checkout","finishButton"));
+    private final By checkOutPageTitle = LocatorFactory.create(YamlLocatorReader.get("checkout","checkOutPageTitle"));
 
     public CheckOutPage(WebDriver driver){
         this.waitUtils = new WaitUtils(driver);

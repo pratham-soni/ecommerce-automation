@@ -6,6 +6,7 @@ import com.ecommerce.automation.pages.CheckOutPage;
 import com.ecommerce.automation.pages.LoginPage;
 import com.ecommerce.automation.pages.OrderConfirmationPage;
 import com.ecommerce.automation.pages.ProductsPage;
+import com.ecommerce.automation.utils.TestDataReader;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -37,8 +38,8 @@ public class PurchaseSteps {
 
         productsPage = new ProductsPage(DriverFactory.getDriver());
 
-        loginPage.enterUsername("standard_user");
-        loginPage.enterPassword("secret_sauce");
+        loginPage.enterUsername(TestDataReader.get("username"));
+        loginPage.enterPassword(TestDataReader.get("password"));
         loginPage.clickLogin();
 
         Assert.assertTrue(
@@ -79,9 +80,9 @@ public class PurchaseSteps {
                 checkOutPage.isCheckOutPageDisplayed(),
                 "Checkout page should be displayed.");
 
-        checkOutPage.enterFirstName("kartik");
-        checkOutPage.enterLastName("kuswaha");
-        checkOutPage.enterPostalCode("221005");
+        checkOutPage.enterFirstName(TestDataReader.get("firstName"));
+        checkOutPage.enterLastName(TestDataReader.get("lastName"));
+        checkOutPage.enterPostalCode(TestDataReader.get("postalCode"));
 
         checkOutPage.clickContinue();
 

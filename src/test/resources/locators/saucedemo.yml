@@ -1,0 +1,26 @@
+login:
+  username: "id=user-name"
+  password: "id=password"
+  loginButton: "id=login-button"
+
+products:
+  pageTitle: "css=.title"
+  cartLink: "class=shopping_cart_link"
+  backpackAddToCart: "id=add-to-cart-sauce-labs-backpack"
+
+cart:
+  cartTitle: "css=.title"
+  backpackItem: "id=item_4_title_link"
+  checkoutBtn: "id=checkout"
+
+checkout:
+  firstNameInput: "id=first-name"
+  lastNameInput: "id=last-name"
+  postalCodeInput: "id=postal-code"
+  continueBtn: "id=continue"
+  checkOutOverview: "xpath=//span[contains(text(),'Checkout: Overview')]"
+  finishButton: "id=finish"
+  checkOutPageTitle: "xpath=//span[contains(text(),'Checkout: Your Information')]"
+
+orderConfirmation:
+  confirmationMessage: "css=.complete-header"
